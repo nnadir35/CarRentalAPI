@@ -17,9 +17,9 @@ CarManager carManager = new CarManager(new EfCarDal());
 //carManager.Add(car);
 BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-List<Car> cars =  carManager.GetAll();
+var cars =  carManager.GetAll();
 
-var carsss = cars.FindAll(indexedCar => indexedCar.BrandId ==1);
+var carsss = cars.Data.FindAll(indexedCar => indexedCar.BrandId ==1);
 Console.WriteLine($"carsss length: {carsss.Count}");
 
 carManager.GetCarWithDetails();
@@ -27,3 +27,11 @@ carManager.GetCarWithDetails();
 
 carManager.GetCarsByColorId(2);
 carManager.GetCarsByBrandId(3);
+
+Brand brand = new Brand()
+{
+    Name = "BMW"
+};
+var isRecordExist = brandManager.IsRecordExist(brand);
+Console.WriteLine(isRecordExist.Data);
+Console.WriteLine(isRecordExist.Message);

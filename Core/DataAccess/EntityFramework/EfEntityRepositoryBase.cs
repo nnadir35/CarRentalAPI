@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Core.Entities;
+using Core.Utilities.Results;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.DataAccess.EntityFramework;
@@ -52,5 +53,15 @@ public class EfEntityRepositoryBase<TEntity, TContext> :IEntityRepository<TEntit
             deletedEntity.State = EntityState.Deleted;
             context.SaveChanges();
         }
+    }
+    public IDataResult<bool> IsRecordExist(Expression<Func<TEntity, bool>> filter)
+    {
+        using (TContext context = new TContext())
+        {
+            if (context.Set<TEntity>().Where(filter).Any())
+                return new SuccessDataResult<bool>(true,"Veritabanında kayıtlı");
+            
+        }
+        return new ErrorDataResult<bool>(false,"Böyle bir kayıt bulunamadı");
     }
 }

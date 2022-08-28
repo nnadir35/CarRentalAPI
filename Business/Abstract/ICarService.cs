@@ -1,10 +1,12 @@
-﻿using Core.Utilities.Results;
+﻿using Core.Business;
+using Core.Utilities.Results;
 using Entities.Concrete;
 
 namespace Business.Abstract;
 
-public interface ICarService
+public interface ICarService:IBaseService<Car>
 {
-    IResult GetCarsByBrandId(int id);
-    IResult GetCarsByColorId(int id);
+    IDataResult<List<Car>> GetById(int id);
+    IDataResult<List<Car>> GetCarsByBrandId(int id);
+    IDataResult<List<Car>> GetCarsByColorId(int id);
 }

@@ -8,16 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework;
 
-public class EfCarDal:EfEntityRepositoryBase<Car,CarDbContext>,ICarDal
+public class EfCarDal:EfEntityRepositoryBase<Car,CarRentalDbContext>,ICarDal
 {
     public List<CarDetailDto> GetCarsWithDetails()
     {
-        using (CarDbContext carDbContext = new CarDbContext())
+        using (CarRentalDbContext carRentalDbContext = new CarRentalDbContext())
         {
-            var carDetailDtos = from car in carDbContext.Cars
-                join color in carDbContext.Colors
+            var carDetailDtos = from car in carRentalDbContext.Cars
+                join color in carRentalDbContext.Colors
                     on car.ColorId equals color.Id
-                join brand in carDbContext.Brands
+                join brand in carRentalDbContext.Brands
                     on car.BrandId equals brand.Id
                 select new CarDetailDto()
                 {

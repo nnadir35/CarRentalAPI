@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -12,10 +13,24 @@ public class BrandManager:IBrandService
     {
         _brandDal = brandDal;
     }
-
-
-    public void AddNewBrand(Brand brand)
+    public IResult AddNewBrand(Brand brand)
     {
-        _brandDal.Add(brand);
+        throw new NotImplementedException();
+    }
+
+    public IResult Add(Brand entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IDataResult<List<Brand>> GetAll()
+    {
+        return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
+    }
+
+    public IDataResult<bool> IsRecordExist(Brand entity)
+    {
+        return _brandDal.IsRecordExist(brand =>brand.Name == entity.Name );
+
     }
 }

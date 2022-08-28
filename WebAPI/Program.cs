@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<CarDbContext>
+builder.Services.AddDbContext<CarRentalDbContext>
 (optionsBuilder => 
     optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("CarRental")));
 

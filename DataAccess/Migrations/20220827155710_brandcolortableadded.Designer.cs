@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DataAccess.Migrations
 {
-    [DbContext(typeof(CarDbContext))]
+    [DbContext(typeof(CarRentalDbContext))]
     [Migration("20220827155710_brandcolortableadded")]
     partial class brandcolortableadded
     {

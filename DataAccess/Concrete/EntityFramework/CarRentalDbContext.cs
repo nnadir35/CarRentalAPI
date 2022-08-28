@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework;
 
-public class CarDbContext:DbContext
+public class CarRentalDbContext:DbContext
 {   
-    public CarDbContext()
+    public CarRentalDbContext()
     {
     }
 
-    public CarDbContext(DbContextOptions<CarDbContext> options)
+    public CarRentalDbContext(DbContextOptions<CarRentalDbContext> options)
         : base(options)
     {
     }

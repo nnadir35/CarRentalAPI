@@ -1,8 +1,10 @@
-﻿using Entities.Concrete;
+﻿using Core.Business;
+using Core.Utilities.Results;
+using Entities.Concrete;
 
 namespace Business.Abstract;
 
-public interface IBrandService
+public interface IBrandService:IBaseService<Brand>
 {
-    void AddNewBrand(Brand brand);
+    
 }

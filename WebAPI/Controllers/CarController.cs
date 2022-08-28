@@ -11,16 +11,16 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class CarController : ControllerBase
 {
-    private CarDbContext _carDbContext;
+    private CarRentalDbContext _carRentalDbContext;
 
     private readonly ILogger<CarController> _logger;
 
     private ICarDal _carDal;
 
-    public CarController(ILogger<CarController> logger, CarDbContext carDbContext, ICarDal carDal)
+    public CarController(ILogger<CarController> logger, CarRentalDbContext carRentalDbContext, ICarDal carDal)
     {
         _logger = logger;
-        _carDbContext = carDbContext;
+        _carRentalDbContext = carRentalDbContext;
         _carDal = carDal;
     }
 

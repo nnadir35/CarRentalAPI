@@ -14,34 +14,46 @@ public class CarManager:ICarService
     {
         _carDal = carDal;
     }
-    public List<Car> GetAll()
+    public IDataResult<List<Car>> GetAll()
     {
-        return _carDal.GetAll();
+        return new SuccessDataResult<List<Car>>(_carDal.GetAll());
     }
 
-    public void Add(Car car)
+    public IDataResult<bool> IsRecordExist(Car entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IDataResult<List<Car>> GetById(int id)
+    {
+        return new SuccessDataResult<List<Car>>(_carDal.GetAll(car => car.Id == id));
+    }
+
+
+    public IResult Add(Car car)
     {
         if (car.Description.Length>=3 && car.DailyPrice>0)
         {
             _carDal.Add(car);
-        }else Console.WriteLine("olmadı");
+            return new SuccessResult("eklendi");
+        }else return new ErrorResult("olmadı");
     }
 
-    public IResult GetCarsByBrandId(int id)
+    public IDataResult<List<Car>> GetCarsByBrandId(int id)
     {
         List<Car> cars = _carDal.GetAll(indexedCar => indexedCar.BrandId == id)??null;
         Console.WriteLine($"GetCarsByBrandId: {cars.Count}");
-        return cars;
+        return new SuccessDataResult<List<Car>>(cars);
     }
 
-    public IResult GetCarsByColorId(int id)
+    public IDataResult<List<Car>> GetCarsByColorId(int id)
     {
         List<Car> cars = _carDal.GetAll(indexedCar => indexedCar.ColorId == id)??null;
         Console.WriteLine($"GetCarsByColorId: {cars.Count}");
-        return cars;
+        return new SuccessDataResult<List<Car>>(cars);
     }
 
-    public void GetCarWithDetails()
+    public IDataResult<List<CarDetailDto>> GetCarWithDetails()
     {
         List<CarDetailDto> carDetailDtos =  _carDal.GetCarsWithDetails();
         Console.WriteLine(carDetailDtos.Count);
@@ -52,5 +64,7 @@ public class CarManager:ICarService
                               $"{carDetailDto.Brand}/ " +
                               $"{carDetailDto.DailyPrice}/ ");
         }
+
+        return new SuccessDataResult<List<CarDetailDto>>(carDetailDtos);
     }
 }
