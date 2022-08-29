@@ -13,14 +13,19 @@ public class BrandManager:IBrandService
     {
         _brandDal = brandDal;
     }
-    public IResult AddNewBrand(Brand brand)
-    {
-        throw new NotImplementedException();
-    }
 
     public IResult Add(Brand entity)
     {
-        throw new NotImplementedException();
+        var isRecordExist = IsRecordExist(entity);
+        if (isRecordExist.Data)
+        {
+            return new ErrorResult(isRecordExist.Message);
+        }
+        else
+        {
+            _brandDal.Add(entity);
+            return new SuccessResult("veri başarıyla eklendi");
+        }
     }
 
     public IDataResult<List<Brand>> GetAll()

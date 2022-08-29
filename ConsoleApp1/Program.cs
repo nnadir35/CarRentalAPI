@@ -30,8 +30,10 @@ carManager.GetCarsByBrandId(3);
 
 Brand brand = new Brand()
 {
-    Name = "BMW"
+    Name = "RENAULT"
 };
 var isRecordExist = brandManager.IsRecordExist(brand);
-Console.WriteLine(isRecordExist.Data);
-Console.WriteLine(isRecordExist.Message);
+var addNewBrand = brandManager.Add(brand);
+
+Console.WriteLine(addNewBrand.Success);
+Console.WriteLine(addNewBrand.Message);

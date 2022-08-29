@@ -4,9 +4,7 @@ using Core.Entities;
 namespace Entities.Concrete;
 
 public class Car:BaseEntity
-{
-    [ForeignKey("Id")]
-    public int Id { get; set; }
+{   public int Id { get; set; }
     public int BrandId { get; set; }
     public int ColorId { get; set; }
     public string Description { get; set; }

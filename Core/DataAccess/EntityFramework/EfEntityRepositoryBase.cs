@@ -21,7 +21,7 @@ public class EfEntityRepositoryBase<TEntity, TContext> :IEntityRepository<TEntit
     {
         using (TContext context = new TContext())
         {
-            return context.Set<TEntity>().Where(filter).FirstOrDefault() ?? new TEntity();
+            return context.Set<TEntity>().Where(filter).FirstOrDefault();
         }
     }
 
