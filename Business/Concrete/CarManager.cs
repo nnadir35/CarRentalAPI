@@ -18,12 +18,7 @@ public class CarManager:ICarService
     {
         return new SuccessDataResult<List<Car>>(_carDal.GetAll());
     }
-
-    public IDataResult<bool> IsRecordExist(Car entity)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public IDataResult<List<Car>> GetById(int id)
     {
         return new SuccessDataResult<List<Car>>(_carDal.GetAll(car => car.Id == id));

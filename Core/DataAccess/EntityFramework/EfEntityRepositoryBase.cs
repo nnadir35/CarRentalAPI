@@ -59,9 +59,9 @@ public class EfEntityRepositoryBase<TEntity, TContext> :IEntityRepository<TEntit
         using (TContext context = new TContext())
         {
             if (context.Set<TEntity>().Where(filter).Any())
-                return new SuccessDataResult<bool>(true,"Veritabanında kayıtlı");
+                return new SuccessDataResult<bool>(true);
             
         }
-        return new ErrorDataResult<bool>(false,"Böyle bir kayıt bulunamadı");
+        return new ErrorDataResult<bool>(false);
     }
 }

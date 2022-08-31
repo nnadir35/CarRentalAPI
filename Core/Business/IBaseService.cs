@@ -6,5 +6,4 @@ public interface IBaseService<T>
 {
     IResult Add(T entity);
     IDataResult<List<T>> GetAll();
-    IDataResult<bool> IsRecordExist(T entity);
 }

@@ -94,26 +94,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("Entities.Concrete.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Companies");
-                });
-
             modelBuilder.Entity("Entities.Concrete.Rental", b =>
                 {
                     b.Property<int>("Id")
@@ -128,20 +108,20 @@ namespace DataAccess.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
+                    b.Property<DateTime>("RentDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Rentals");
                 });
@@ -157,15 +137,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<bool>("HasLicense")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -181,8 +155,6 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.ToTable("Users");
                 });
 
@@ -194,26 +166,18 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
+                    b.HasOne("Entities.Concrete.User", null)
+                        .WithMany("RentalList")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Car");
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Entities.Concrete.User", b =>
                 {
-                    b.HasOne("Entities.Concrete.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
+                    b.Navigation("RentalList");
                 });
 #pragma warning restore 612, 618
         }
