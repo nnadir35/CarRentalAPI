@@ -19,14 +19,16 @@ public class EfCarDal:EfEntityRepositoryBase<Car,CarRentalDbContext>,ICarDal
                     on car.ColorId equals color.Id
                 join brand in carRentalDbContext.Brands
                     on car.BrandId equals brand.Id
+                join user in carRentalDbContext.Users on car.Rental.UserId equals user.Id
                 select new CarDetailDto()
                 {
+                    UserId = user.Id,
                     Description = car.Description,
                     Brand = brand.Name,
                     Color = color.Name,
                     DailyPrice = car.DailyPrice
                 };
-            return carDetailDtos.ToList();
+            return carDetailDtos.Where(dto => dto.UserId==20).ToList();
         }
         
     }

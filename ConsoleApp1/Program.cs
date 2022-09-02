@@ -1,49 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.ComponentModel.DataAnnotations;
+using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 DateTime dateTime = DateTime.Now;
-//
-// Car car = new Car()
-// {
-//     Description = $"{dateTime}",
-//     BrandId = 1,
-//     ColorId = 1,
-//     DailyPrice = 100,
-//     ModelYear = 1999
-// };
-// CarManager carManager = new CarManager(new EfCarDal());
-// //carManager.Add(car);
-// BrandManager brandManager = new BrandManager(new EfBrandDal());
-//
-// var cars =  carManager.GetAll();
-//
-// var carsss = cars.Data.FindAll(indexedCar => indexedCar.BrandId ==1);
-// Console.WriteLine($"carsss length: {carsss.Count}");
-//
-// carManager.GetCarWithDetails();
-//
-//
-// carManager.GetCarsByColorId(2);
-// carManager.GetCarsByBrandId(3);
-//
-// Brand brand = new Brand()
-// {
-//     Name = "RENAULT"
-// };
-// var isRecordExist = brandManager.IsRecordExist(brand);
-// var addNewBrand = brandManager.Add(brand);
-//
-// Console.WriteLine(addNewBrand.Success);
-// Console.WriteLine(addNewBrand.Message);
-//
-// CarRentalDbContext carRentalDbContext = new CarRentalDbContext();
-// var asd = await carRentalDbContext.Cars.CountAsync(car1 => car1.ColorId==2);
-// Console.WriteLine("asd: "+asd);
+CarManager carManager = new CarManager(new EfCarDal());
+var addedDays = dateTime.AddDays(1.0);
 UserManager userManager = new UserManager(new EfUserDal());
 
 User user = new User()
@@ -51,13 +18,48 @@ User user = new User()
     Name = "Nadircan",
     Surname = "Alkış",
     Email = "nadir@gmail.com",
-    Password = "asd",
+    Password = "123",
+    RentalList = new List<Rental>()
+    {
+        new Rental()
+        {
+            Car = new Car()
+            {
+                Description = "from mert3",
+                BrandId = 1,
+                ColorId = 2,
+            }
+        }
+    }
+    
 };
-
 //var addUser = userManager.Add(user);
+RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
-
-//Console.WriteLine(addUser.Message);
-// Console.WriteLine(EmailValidator.IsEmailValid(user.Email).Success);
-// Console.WriteLine(EmailValidator.IsEmailValid(user.Email).Message);
-Console.WriteLine("EmailValidationRegexCompiled:  "+EmailValidator.EmailValidationRegexCompiled.IsMatch(user.Email).ToString());
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+var newCar = new Car()
+{
+    BrandId = 1,
+    ColorId = 1,
+    Description = "1",
+    DailyPrice = 123,
+    ModelYear = 2005
+};
+//var asdasdasda =carManager.Add(newCar);
+//Console.WriteLine(asdasdasda.Message);
+ Rental rental = new Rental()
+ { 
+     UserId = 1,
+ };
+rentalManager.Add(rental);
+// var carWithDetails = carManager.GetCarWithDetails().Data;
+// foreach (CarDetailDto dto in carWithDetails)
+// {
+//     //Console.WriteLine(dto.ToString());
+//     Console.WriteLine($"{dto.Brand}/ {dto.Color}/ {dto.Description}/ {dto.DailyPrice}/ {dto.UserId}");
+// }
+// Console.WriteLine("rental.Id: "+rental.Id);
+//
+// Console.WriteLine("rental.Id: "+rental.Car.Id);
+//var asdsdsdf= rentalManager.RentACar(rental2, DateTime.Today.AddDays(4.0));
+//Console.WriteLine(asdsdsdf.Message);

@@ -27,11 +27,10 @@ public class CarManager:ICarService
 
     public IResult Add(Car car)
     {
-        if (car.Description.Length>=3 && car.DailyPrice>0)
-        {
-            _carDal.Add(car);
-            return new SuccessResult("eklendi");
-        }else return new ErrorResult("olmadı");
+        if (car.Description.Length < 2) return new ErrorResult("Araba açıklaması 2 karakterden büüyk olmalıdır.");
+        if (car.DailyPrice <= 0) return new ErrorResult("Günlük kiralama bedeli pozitif olmalıdır");
+        _carDal.Add(car);
+        return new SuccessResult("eklendi");
     }
 
     public IDataResult<List<Car>> GetCarsByBrandId(int id)
@@ -52,14 +51,6 @@ public class CarManager:ICarService
     {
         List<CarDetailDto> carDetailDtos =  _carDal.GetCarsWithDetails();
         Console.WriteLine(carDetailDtos.Count);
-        foreach (var carDetailDto in carDetailDtos)
-        {
-            Console.WriteLine($"{carDetailDto.Description}/ " +
-                              $"{carDetailDto.Color}/ " +
-                              $"{carDetailDto.Brand}/ " +
-                              $"{carDetailDto.DailyPrice}/ ");
-        }
-
         return new SuccessDataResult<List<CarDetailDto>>(carDetailDtos);
     }
 }

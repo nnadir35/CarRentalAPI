@@ -25,6 +25,12 @@ public class CarRentalDbContext:DbContext
         modelBuilder.Entity<Color>()
             .Property(p => p.Id)
             .ValueGeneratedOnAdd();
+        modelBuilder.Entity<Rental>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
+        modelBuilder.Entity<User>()
+            .Property(p => p.Id)
+            .ValueGeneratedOnAdd();
     }
     
     

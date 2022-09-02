@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    [Migration("20220831222110_tablesupdated")]
-    partial class tablesupdated
+    [Migration("20220902000458_rentalsupdated")]
+    partial class rentalsupdated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,7 +71,13 @@ namespace DataAccess.Migrations
                     b.Property<int>("ModelYear")
                         .HasColumnType("integer");
 
+                    b.Property<int>("RentalId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RentalId")
+                        .IsUnique();
 
                     b.ToTable("Cars");
                 });
@@ -107,10 +113,10 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("integer");
+                    b.Property<bool>("IsRented")
+                        .HasColumnType("boolean");
 
-                    b.Property<DateTime>("RentDate")
+                    b.Property<DateTime?>("RentDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("ReturnDate")
@@ -120,8 +126,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CarId");
 
                     b.HasIndex("UserId");
 
@@ -160,21 +164,32 @@ namespace DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Entities.Concrete.Rental", b =>
+            modelBuilder.Entity("Entities.Concrete.Car", b =>
                 {
-                    b.HasOne("Entities.Concrete.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
+                    b.HasOne("Entities.Concrete.Rental", "Rental")
+                        .WithOne("Car")
+                        .HasForeignKey("Entities.Concrete.Car", "RentalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.User", null)
+                    b.Navigation("Rental");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Rental", b =>
+                {
+                    b.HasOne("Entities.Concrete.User", "User")
                         .WithMany("RentalList")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Car");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Rental", b =>
+                {
+                    b.Navigation("Car")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.Concrete.User", b =>
