@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Linq.Expressions;
+using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,7 +19,12 @@ public class CarManager:ICarService
     {
         return new SuccessDataResult<List<Car>>(_carDal.GetAll());
     }
-    
+
+    public IDataResult<Car> GetById(Expression<Func<Car, bool>> filter)
+    {
+        throw new NotImplementedException();
+    }
+
     public IDataResult<List<Car>> GetById(int id)
     {
         return new SuccessDataResult<List<Car>>(_carDal.GetAll(car => car.Id == id));

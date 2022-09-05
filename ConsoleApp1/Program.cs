@@ -63,3 +63,5 @@ rentalManager.Add(rental);
 // Console.WriteLine("rental.Id: "+rental.Car.Id);
 //var asdsdsdf= rentalManager.RentACar(rental2, DateTime.Today.AddDays(4.0));
 //Console.WriteLine(asdsdsdf.Message);
+rentalManager.GetAll();
+Console.WriteLine(rentalManager.Get(rental1 => rental1.Id == 20));

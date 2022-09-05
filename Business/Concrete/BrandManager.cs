@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Linq.Expressions;
+using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -31,6 +32,11 @@ public class BrandManager:IBrandService
     public IDataResult<List<Brand>> GetAll()
     {
         return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
+    }
+
+    public IDataResult<Brand> GetById(Expression<Func<Brand, bool>> filter)
+    {
+        throw new NotImplementedException();
     }
 
     public IDataResult<bool> IsRecordExist(Brand entity)

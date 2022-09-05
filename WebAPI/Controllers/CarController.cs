@@ -1,7 +1,4 @@
-using Business.Concrete;
-using Core;
-using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
+using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,20 +8,14 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class CarController : ControllerBase
 {
-    private CarRentalDbContext _carRentalDbContext;
+    private ICarService _carService;
 
-    private readonly ILogger<CarController> _logger;
-
-    private ICarDal _carDal;
-
-    public CarController(ILogger<CarController> logger, CarRentalDbContext carRentalDbContext, ICarDal carDal)
+    public CarController(ICarService carService)
     {
-        _logger = logger;
-        _carRentalDbContext = carRentalDbContext;
-        _carDal = carDal;
+        _carService = carService;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet]
     public List<Car> Get()
     {
         return new List<Car>();
@@ -33,8 +24,7 @@ public class CarController : ControllerBase
     [HttpPost]
     public IActionResult Add(Car car)
     {
-        CarManager carManager = new CarManager(_carDal);
-        carManager.Add(car:car);
+        _carService.Add(car);
         return Ok();
     }
 }

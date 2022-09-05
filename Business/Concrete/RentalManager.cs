@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Linq.Expressions;
+using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -26,6 +27,15 @@ public class RentalManager:IRentalService
         return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
     }
 
+    public IDataResult<Rental> GetById(Expression<Func<Rental, bool>> filter)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IDataResult<Rental> Get(Expression<Func<Rental,bool>> expression)
+    {
+        return new SuccessDataResult<Rental>(_rentalDal.Get(expression));
+    }
     public IResult RentACar(Rental rental,DateTime dateTime)
     {
         Rental selectedRental = _rentalDal.Get(filterRental =>filterRental.Id==rental.Id);

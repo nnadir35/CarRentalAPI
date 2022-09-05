@@ -1,4 +1,7 @@
+using Business.Abstract;
+using Business.Concrete;
 using Core;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +16,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CarRentalDbContext>
 (optionsBuilder => 
     optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("CarRental")));
+builder.Services.AddScoped<ICarService, CarManager>();
+builder.Services.AddScoped<ICarDal, EfCarDal>();
+builder.Services.AddScoped<IUserService, UserManager>();
+builder.Services.AddScoped<IUserDal, EfUserDal>();
 
 var app = builder.Build();
 
