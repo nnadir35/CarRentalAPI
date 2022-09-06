@@ -22,14 +22,12 @@ public class CarManager:ICarService
 
     public IDataResult<Car> GetById(Expression<Func<Car, bool>> filter)
     {
-        throw new NotImplementedException();
+        var result = _carDal.Get(filter);
+        
+        return new DataResult<Car>(result ==null?false:true,result ==null?null:result);
     }
 
-    public IDataResult<List<Car>> GetById(int id)
-    {
-        return new SuccessDataResult<List<Car>>(_carDal.GetAll(car => car.Id == id));
-    }
-
+    
 
     public IResult Add(Car car)
     {
@@ -37,6 +35,11 @@ public class CarManager:ICarService
         if (car.DailyPrice <= 0) return new ErrorResult("Günlük kiralama bedeli pozitif olmalıdır");
         _carDal.Add(car);
         return new SuccessResult("eklendi");
+    }
+
+    public IDataResult<List<Car>> GetById(int id)
+    {
+        throw new NotImplementedException();
     }
 
     public IDataResult<List<Car>> GetCarsByBrandId(int id)

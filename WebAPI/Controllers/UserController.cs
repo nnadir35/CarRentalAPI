@@ -34,7 +34,7 @@ public class UserController:ControllerBase
         }
         return new SuccessDataResult<List<UserVm>>(userListVms,getUsers.Message);
     }
-    [HttpGet("getById")]
+    [HttpGet("getbyid")]
     public IDataResult<UserVm> GetUserById(int id)
     {
         var getUser = _userService.GetById(user => user.Id == id);
