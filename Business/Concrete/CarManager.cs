@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -31,8 +33,7 @@ public class CarManager:ICarService
 
     public IResult Add(Car car)
     {
-        if (car.Description.Length < 2) return new ErrorResult("Araba açıklaması 2 karakterden büüyk olmalıdır.");
-        if (car.DailyPrice <= 0) return new ErrorResult("Günlük kiralama bedeli pozitif olmalıdır");
+        ValidationTool.Validate(new CarValidator(),car); 
         _carDal.Add(car);
         return new SuccessResult("eklendi");
     }
