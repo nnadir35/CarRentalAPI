@@ -31,7 +31,7 @@ public class CarController : ControllerBase
                BrandId = carData.BrandId,
                ColorId = carData.ColorId,
                DailyPrice = carData.DailyPrice,
-               ModelYear = carData.ModelYear,
+               ModelYear = 2005,
                RentalId = carData.RentalId
             };
             listCarVms.Add(carVm);
@@ -63,9 +63,17 @@ public class CarController : ControllerBase
     }
     
     [HttpPost]
-    public IResult Add(Car car)
+    public IResult Add(AddCarVm car)
     {
-        var action = _carService.Add(car);
+        Car added = new Car();
+
+        added.Description = car.Description;
+        added.BrandId = car.BrandId;
+        added.ColorId = car.ColorId;
+        added.DailyPrice = car.DailyPrice;
+        added.ModelYear = car.ModelYear;
+        added.RentalId = 28;
+        var action = _carService.Add(added);
         return new Result(action.Success,action.Message);
     }
 }

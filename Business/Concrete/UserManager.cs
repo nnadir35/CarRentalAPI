@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,13 +18,14 @@ public class UserManager:IUserService
     {
         _userDal = userDal;
     }
-
-
+    
+    
+    [ValidationAspect(typeof(UserValidator))]
     public IResult Add(User user)
     {
-        bool isUserExist = CheckUserEmailExist(user: user);
-        if (isUserExist) return new ErrorResult("Girilen e-posta adresiyle ilişkili hesap bulunmaktadır");
-        if (EmailValidator.IsEmailValid(user.Email).Success == false) return new ErrorResult("Geçersiz e-posta");
+        
+        // bool isUserExist = CheckUserEmailExist(user: user);
+        // if (isUserExist) return new ErrorResult("Girilen e-posta adresiyle ilişkili hesap bulunmaktadır");
         _userDal.Add(user);
         return new SuccessResult("Kullanıcı veritabanına eklendi");
     }

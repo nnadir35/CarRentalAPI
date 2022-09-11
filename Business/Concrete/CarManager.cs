@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -30,10 +31,10 @@ public class CarManager:ICarService
     }
 
     
-
+    
+    [ValidationAspect(typeof(CarValidator))]
     public IResult Add(Car car)
     {
-        ValidationTool.Validate(new CarValidator(),car); 
         _carDal.Add(car);
         return new SuccessResult("eklendi");
     }
