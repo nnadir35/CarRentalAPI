@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    [Migration("20220902000458_rentalsupdated")]
-    partial class rentalsupdated
+    [Migration("20220911065453_carimagesadded")]
+    partial class carimagesadded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,6 +80,34 @@ namespace DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.CarImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("AddedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("CarImages");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Color", b =>
@@ -175,6 +203,17 @@ namespace DataAccess.Migrations
                     b.Navigation("Rental");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.CarImage", b =>
+                {
+                    b.HasOne("Entities.Concrete.Car", "Car")
+                        .WithMany("CarImages")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+                });
+
             modelBuilder.Entity("Entities.Concrete.Rental", b =>
                 {
                     b.HasOne("Entities.Concrete.User", "User")
@@ -184,6 +223,11 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Car", b =>
+                {
+                    b.Navigation("CarImages");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Rental", b =>

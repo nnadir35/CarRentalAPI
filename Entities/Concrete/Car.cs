@@ -14,4 +14,5 @@ public class Car:BaseEntity
     public string Description { get; set; }
     public int ModelYear { get; set; }
     public float DailyPrice { get; set; }
+    public List<CarImage>? CarImages { get; set; }
 }

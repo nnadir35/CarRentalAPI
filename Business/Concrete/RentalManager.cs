@@ -24,6 +24,11 @@ public class RentalManager:IRentalService
 
     public IDataResult<List<Rental>> GetAll()
     {
+        // var rentaList = _rentalDal.GetAll(rental => rental.User.Id != id);
+        // foreach (Rental rental in rentaList)
+        // {
+        //     new 
+        // }
         return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
     }
 

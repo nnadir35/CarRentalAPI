@@ -12,6 +12,6 @@ public class CarValidator:AbstractValidator<Car>
         RuleFor(car => car.BrandId).NotEmpty();
         RuleFor(car => car.ColorId).NotEmpty();
         RuleFor(car => car.DailyPrice).GreaterThan(0);
-        RuleFor(car => car.ModelYear).GreaterThan(1900);
+        RuleFor(car => car.ModelYear).GreaterThan(1900).LessThan(DateTime.Today.Year);
     }
 }
