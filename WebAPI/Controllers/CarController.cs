@@ -27,10 +27,8 @@ public class CarController : ControllerBase
         {
             var carVm = new ListCarVm()
             {
-               Description = carData.Description,
                BrandId = carData.BrandId,
                ColorId = carData.ColorId,
-               DailyPrice = carData.DailyPrice,
                ModelYear = 2005,
                RentalId = carData.RentalId
             };
@@ -49,10 +47,8 @@ public class CarController : ControllerBase
             var carDataResult = carData.Data;
             var carVm = new ListCarVm()
             {
-                Description = carDataResult.Description,
                 BrandId = carDataResult.BrandId,
                 ColorId = carDataResult.ColorId,
-                DailyPrice = carDataResult.DailyPrice,
                 ModelYear = carDataResult.ModelYear,
                 RentalId = carDataResult.RentalId
             };
@@ -67,10 +63,8 @@ public class CarController : ControllerBase
     {
         Car added = new Car();
 
-        added.Description = car.Description;
         added.BrandId = car.BrandId;
         added.ColorId = car.ColorId;
-        added.DailyPrice = car.DailyPrice;
         added.ModelYear = car.ModelYear;
         added.RentalId = 28;
         var action = _carService.Add(added);

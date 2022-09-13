@@ -25,7 +25,6 @@ User user = new User()
         {
             Car = new Car()
             {
-                Description = "from mert3",
                 BrandId = 1,
                 ColorId = 2,
             }
@@ -41,8 +40,6 @@ var newCar = new Car()
 {
     BrandId = 1,
     ColorId = 1,
-    Description = "1",
-    DailyPrice = 123,
     ModelYear = 2005
 };
 //var asdasdasda =carManager.Add(newCar);

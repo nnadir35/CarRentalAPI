@@ -23,10 +23,8 @@ public class EfCarDal:EfEntityRepositoryBase<Car,CarRentalDbContext>,ICarDal
                 select new CarDetailDto()
                 {
                     UserId = user.Id,
-                    Description = car.Description,
                     Brand = brand.Name,
                     Color = color.Name,
-                    DailyPrice = car.DailyPrice
                 };
             return carDetailDtos.Where(dto => dto.UserId==20).ToList();
         }

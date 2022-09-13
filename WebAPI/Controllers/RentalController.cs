@@ -37,11 +37,10 @@ public class RentalController:ControllerBase
             UserId = addRentalVm.UserId
         };
         
-        rental.Car.Description= addRentalVm.AddCarVm.Description;
         rental.Car.BrandId = addRentalVm.AddCarVm.BrandId;
         rental.Car.ColorId = addRentalVm.AddCarVm.ColorId;
-        rental.Car.DailyPrice = addRentalVm.AddCarVm.DailyPrice;
         rental.Car.ModelYear = addRentalVm.AddCarVm.ModelYear;
+        
         return _rentalService.Add(rental);
     }
 }

@@ -58,6 +58,11 @@ public class CarManager:ICarService
         return new SuccessDataResult<List<Car>>(cars);
     }
 
+    public IDataResult<List<Car>> GetByUnitPrice(decimal min, decimal max)
+    {
+        throw new NotImplementedException();
+    }
+
     public IDataResult<List<CarDetailDto>> GetCarWithDetails()
     {
         List<CarDetailDto> carDetailDtos =  _carDal.GetCarsWithDetails();

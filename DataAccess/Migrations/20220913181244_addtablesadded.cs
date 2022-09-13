@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DataAccess.Migrations
 {
-    public partial class carimagesadded : Migration
+    public partial class addtablesadded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,6 +63,8 @@ namespace DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     IsRented = table.Column<bool>(type: "boolean", nullable: false),
+                    DailyPrice = table.Column<float>(type: "real", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
                     RentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     ReturnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Active = table.Column<bool>(type: "boolean", nullable: false)
@@ -87,9 +89,7 @@ namespace DataAccess.Migrations
                     BrandId = table.Column<int>(type: "integer", nullable: false),
                     ColorId = table.Column<int>(type: "integer", nullable: false),
                     RentalId = table.Column<int>(type: "integer", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
                     ModelYear = table.Column<int>(type: "integer", nullable: false),
-                    DailyPrice = table.Column<float>(type: "real", nullable: false),
                     Active = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>

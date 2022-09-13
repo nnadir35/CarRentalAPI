@@ -11,6 +11,10 @@ public class Rental:BaseEntity
     public User User { get; set; }
     public Car Car { get; set; }
     public bool IsRented { get; set; }
+    
+    public float DailyPrice { get; set; }
+    
+    public string Description { get; set; }
     public DateTime? RentDate { get; set; } = null;
 
     public DateTime? ReturnDate { get; set; } = null;

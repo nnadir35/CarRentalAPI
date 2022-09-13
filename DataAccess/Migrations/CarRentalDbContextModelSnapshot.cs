@@ -59,13 +59,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("ColorId")
                         .HasColumnType("integer");
 
-                    b.Property<float>("DailyPrice")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("ModelYear")
                         .HasColumnType("integer");
 
@@ -138,6 +131,13 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
+
+                    b.Property<float>("DailyPrice")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsRented")
                         .HasColumnType("boolean");
