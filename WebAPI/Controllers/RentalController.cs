@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.ViewModels;
@@ -13,11 +14,13 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class RentalController:ControllerBase
 {
-    private IRentalService _rentalService;
+    private readonly IRentalService _rentalService;
+    private readonly IMapper _mapper;
 
-    public RentalController(IRentalService rentalService)
+    public RentalController(IRentalService rentalService,IMapper mapper)
     {
         _rentalService = rentalService;
+        _mapper = mapper;
     }
 
 
@@ -30,17 +33,7 @@ public class RentalController:ControllerBase
     [HttpPost]
     public IResult Add(AddRentalVm addRentalVm)
     {
-        Rental rental = new Rental()
-        {
-            RentDate = addRentalVm.RentDate,
-            ReturnDate = addRentalVm.ReturnDate,
-            UserId = addRentalVm.UserId
-        };
-        
-        rental.Car.BrandId = addRentalVm.AddCarVm.BrandId;
-        rental.Car.ColorId = addRentalVm.AddCarVm.ColorId;
-        rental.Car.ModelYear = addRentalVm.AddCarVm.ModelYear;
-        
+        var rental = _mapper.Map<AddRentalVm, Rental>(addRentalVm);
         return _rentalService.Add(rental);
     }
 }

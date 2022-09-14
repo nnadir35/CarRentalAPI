@@ -23,9 +23,8 @@ public class UserManager:IUserService
     [ValidationAspect(typeof(UserValidator))]
     public IResult Add(User user)
     {
-        
-        // bool isUserExist = CheckUserEmailExist(user: user);
-        // if (isUserExist) return new ErrorResult("Girilen e-posta adresiyle ilişkili hesap bulunmaktadır");
+        if (CheckUserEmailExist(user))
+            return new ErrorResult("Bu email' e kayıtlı kullanıcı bulunmaktadır");
         _userDal.Add(user);
         return new SuccessResult("Kullanıcı veritabanına eklendi");
     }

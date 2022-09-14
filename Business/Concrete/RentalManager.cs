@@ -1,5 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,6 +18,8 @@ public class RentalManager:IRentalService
         _rentalDal = rentalDal;
     }
 
+    
+    [ValidationAspect(typeof(RentalValidator))]
     public IResult Add(Rental entity)
     {
         _rentalDal.Add(entity);

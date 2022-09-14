@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 
 namespace Core.CrossCuttingConcerns.Validation.FluentValidation
 {
@@ -10,7 +11,12 @@ namespace Core.CrossCuttingConcerns.Validation.FluentValidation
             var result = validator.Validate(context);
             if (!result.IsValid)
             {
-                throw new ValidationException(result.Errors);
+                string errorMessages = "";
+                foreach (ValidationFailure failure in result.Errors)
+                {
+                    errorMessages += '\n' + failure.ErrorMessage;
+                }
+               throw new ValidationException(errorMessages);
             }
         }
     }

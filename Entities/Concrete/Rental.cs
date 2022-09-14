@@ -10,7 +10,7 @@ public class Rental:BaseEntity
 
     public User User { get; set; }
     public Car Car { get; set; }
-    public bool IsRented { get; set; }
+    public bool IsRented { get; set; } = true;
     
     public float DailyPrice { get; set; }
     
