@@ -19,7 +19,7 @@ public class UserController:ControllerBase
     [HttpGet()]
     public IDataResult<List<UserVm>> GetUsers()
     {
-        IDataResult<List<User>> getUsers = _userService.GetAll();
+        IDataResult<List<Customer>> getUsers = _userService.GetAll();
         List<UserVm> userListVms = new List<UserVm>();
         foreach (var user in getUsers.Data)
         {
@@ -52,14 +52,14 @@ public class UserController:ControllerBase
     public IResult Add(AddUserVm addUserVm)
     {
         
-        User user = new()
+        Customer customer = new()
         {
             Email = addUserVm.Email,
             Name = addUserVm.Name,
             Surname = addUserVm.Surname,
             Password = "uservm",
         };
-        var result = _userService.Add(user);
+        var result = _userService.Add(customer);
         return new Result(result.Success,result.Message);
     }
 }

@@ -21,27 +21,27 @@ public class UserManager:IUserService
     
     
     [ValidationAspect(typeof(UserValidator))]
-    public IResult Add(User user)
+    public IResult Add(Customer customer)
     {
-        if (CheckUserEmailExist(user))
+        if (CheckUserEmailExist(customer))
             return new ErrorResult("Bu email' e kayıtlı kullanıcı bulunmaktadır");
-        _userDal.Add(user);
+        _userDal.Add(customer);
         return new SuccessResult("Kullanıcı veritabanına eklendi");
     }
 
-    public IDataResult<List<User>> GetAll()
+    public IDataResult<List<Customer>> GetAll()
     {
-        return new SuccessDataResult<List<User>>(_userDal.GetAll());
+        return new SuccessDataResult<List<Customer>>(_userDal.GetAll());
     }
 
-    public IDataResult<User> GetById(Expression<Func<User, bool>> filter)
+    public IDataResult<Customer> GetById(Expression<Func<Customer, bool>> filter)
     {
-        return new SuccessDataResult<User>(_userDal.Get(filter));
+        return new SuccessDataResult<Customer>(_userDal.Get(filter));
     }
 
-    public bool CheckUserEmailExist(User user)
+    public bool CheckUserEmailExist(Customer customer)
     {
-        var result = _userDal.IsRecordExist(user1 => user1.Email == user.Email);
+        var result = _userDal.IsRecordExist(user1 => user1.Email == customer.Email);
         return result.Data;
     }
 

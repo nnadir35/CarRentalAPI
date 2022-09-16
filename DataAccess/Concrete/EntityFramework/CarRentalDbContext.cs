@@ -28,7 +28,7 @@ public class CarRentalDbContext:DbContext
         modelBuilder.Entity<Rental>()
             .Property(p => p.Id)
             .ValueGeneratedOnAdd();
-        modelBuilder.Entity<User>()
+        modelBuilder.Entity<Customer>()
             .Property(p => p.Id)
             .ValueGeneratedOnAdd();
         modelBuilder.Entity<CarImage>().Property(image => image.Id);
@@ -52,6 +52,9 @@ public class CarRentalDbContext:DbContext
 
     public DbSet<CarImage> CarImages { get; set; }
     
-    public DbSet<User>? Users { get; set; }
+    public DbSet<Customer>? Customers { get; set; }
 
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 }

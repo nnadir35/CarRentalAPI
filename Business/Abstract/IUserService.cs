@@ -4,7 +4,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract;
 
-public interface IUserService:IBaseService<User>
+public interface IUserService:IBaseService<Customer>
 {
-    bool CheckUserEmailExist(User user);
+    bool CheckUserEmailExist(Customer customer);
 }

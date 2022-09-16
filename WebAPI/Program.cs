@@ -18,7 +18,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddAutoMapper(typeof(RentalProfile));
-builder.Services.AddAutoMapper(typeof(User));
+builder.Services.AddAutoMapper(typeof(Customer));
 builder.Services.AddAutoMapper(typeof(Car));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

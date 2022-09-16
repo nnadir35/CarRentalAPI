@@ -13,7 +13,7 @@ CarManager carManager = new CarManager(new EfCarDal());
 var addedDays = dateTime.AddDays(1.0);
 UserManager userManager = new UserManager(new EfUserDal());
 
-User user = new User()
+Customer customer = new Customer()
 {
     Name = "Nadircan",
     Surname = "Alkış",
@@ -46,7 +46,7 @@ var newCar = new Car()
 //Console.WriteLine(asdasdasda.Message);
  Rental rental = new Rental()
  { 
-     UserId = 1,
+     CustomerId = 1,
  };
 rentalManager.Add(rental);
 // var carWithDetails = carManager.GetCarWithDetails().Data;

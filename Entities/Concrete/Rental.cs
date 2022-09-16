@@ -5,10 +5,10 @@ namespace Entities.Concrete;
 
 public class Rental:BaseEntity
 {
-    [ForeignKey("User")]
-    public int UserId { get; set; }
+    [ForeignKey("Customer")]
+    public int CustomerId { get; set; }
 
-    public User User { get; set; }
+    public Customer Customer { get; set; }
     public Car Car { get; set; }
     public bool IsRented { get; set; } = true;
     
